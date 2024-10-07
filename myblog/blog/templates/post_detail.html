@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ post.title }}</h1>
+<h6>By: {{ post.author.first_name }} {{ post.author.last_name }}</h6>
+<small>{{ post.created_at|date:"F j, Y, g:i a" }}</small>
+<hr>
+<br/>
+<div>
+    {{ post.content|linebreaks }}
+</div>
+
+<br/><br/>
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+        <a href="{% url 'edit-post' post.pk %}" class="btn btn-outline-primary">Edit</a>
+        <a href="{% url 'delete-post' post.pk %}" class="btn btn-outline-danger">Delete</a>
+        <br/><br/>
+    {% endif %}
+{% endif %}
+<br/><br/>
+<h3> Comments </h3>
+{% if not post.comments.all%}
+      No comment yet.. <a href="#"> Add One </a>
+      
+<br/><br/>
+<a href="{% url 'home' %}" class="btn btn-secondary">← Back</a>
+
+{% endblock %}
