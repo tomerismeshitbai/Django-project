@@ -23,7 +23,8 @@
 <h3> Comments </h3>
 {% if not post.comments.all%}
       No comment yet.. <a href="#"> Add One </a>
-      
+      {% comment %}  {% endcomment %}
+
 <br/><br/>
 <a href="{% url 'home' %}" class="btn btn-secondary">← Back</a>
 
