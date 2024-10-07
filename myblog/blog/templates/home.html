@@ -9,11 +9,28 @@
     {% for post in object_list %}
         <li>
             <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> - 
-            {{ post.author.first_name }} {{ post.author.last_name }}<br/>
+            {{ post.author.first_name }} {{ post.author.last_name }} ({{post.author.username}})<br/>
             {{ post.content|slice:":80" }}...
         </li>
     {% endfor %}
     </ul>
+
+    <div class="pagination">
+      <span class="step-links">
+          {% if is_paginated %}
+              {% if page_obj.has_previous %}
+                  <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+              {% endif %}
+              <span class="current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}">Next</a>
+              {% endif %}
+          {% endif %}
+      </span>
+  </div>
+  
 {% else %}
     <p>No posts available.</p>
 {% endif %}
