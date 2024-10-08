@@ -41,6 +41,21 @@ class DeletePost(DeleteView):
     success_url = reverse_lazy('home')
     
     
+class AddComment(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'add_comment.html'
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk'] 
+        form.instance.author = self.request.user 
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('post-detail', kwargs={'pk': self.kwargs['pk']})
+   
+    
+    
     
     
     
