@@ -27,12 +27,12 @@ class ProfileDetailView(generic.DetailView):
     def get_object(self, queryset=None):
         return self.request.user.profile
     
-# def follow_user(request, user_id):
-#     user_to_follow = get_object_or_404(User, id=user_id)
-#     Follow.objects.get_or_create(follower=request.user, following=user_to_follow)
-#     return redirect('users:profile', user_id=user_id)
+def follow_user(request, user_id):
+    user_to_follow = get_object_or_404(User, id=user_id)
+    Follow.objects.get_or_create(follower=request.user, following=user_to_follow)
+    return redirect('users:profile', user_id=user_id)
     
-# def unfollow_user(request, user_id):
-#     user_to_unfollow = User.objects.get(id=user_id)
-#     Follow.objects.filter(follower=request.user, following=user_to_unfollow).delete()
-#     return redirect('users:profile', user_id=user_id)
+def unfollow_user(request, user_id):
+    user_to_unfollow = User.objects.get(id=user_id)
+    Follow.objects.filter(follower=request.user, following=user_to_unfollow).delete()
+    return redirect('users:profile', user_id=user_id)
