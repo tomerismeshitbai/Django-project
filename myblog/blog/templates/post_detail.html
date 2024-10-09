@@ -4,6 +4,7 @@
 
 <h1>{{ post.title }}</h1>
 <h6>By: {{ post.author.first_name }} {{ post.author.last_name }}</h6>
+<a href="{% url 'profile' post.author.id %}">Profile</a>
 <small>{{ post.created_at|date:"F j, Y, g:i a" }}</small>
 <hr>
 <br/>
