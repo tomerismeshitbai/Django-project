@@ -13,5 +13,5 @@
 
         <button class="btn btn-secondary" type="submit" >done</button>
 </div>
-<a href="{% url 'profile' %}">Cancel</a>
+<a href="{% url 'profile' request.user.id %}">Cancel</a>
 {% endblock %}
